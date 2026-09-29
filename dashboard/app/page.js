@@ -15,8 +15,21 @@ async function getStatus() {
   }
 }
 
+async function getEvents() {
+  try {
+    const base = process.env.BACKEND_URL || "http://localhost:8000";
+    const res = await fetch(`${base}/api/events`, { cache: "no-store" });
+    if (!res.ok) throw new Error("Events unavailable");
+    return await res.json();
+  } catch {
+    return { events: [] };
+  }
+}
+
 export default async function Home() {
   const s = await getStatus();
+  const eventData = await getEvents();
+  const events = eventData.events || [];
 
   return (
     <main>
