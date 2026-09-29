@@ -30,6 +30,12 @@ export default async function Home() {
   const s = await getStatus();
   const eventData = await getEvents();
   const events = eventData.events || [];
+  const hasPhase = (phase) => events.some((event) => event.phase === phase);
+  const recon = hasPhase("RECON");
+  const services = hasPhase("SERVICE DISCOVERY");
+  const enumeration = hasPhase("ENUMERATION");
+  const credentials = hasPhase("CREDENTIAL ACCESS");
+  const collection = hasPhase("COLLECTION");
 
   return (
     <main>
@@ -57,13 +63,15 @@ export default async function Home() {
 
         <article className="panel path">
           <h2>LIVE ATTACK PATH</h2>
-          <div className="node source">🌐 Internet</div>
+          <PathStep active={recon} label="🔍 Recon / Port Scan" detail={recon ? "Observed" : "Waiting for scan"} />
           <div className="arrow">↓</div>
-          <div className="node exposed">⚠ Vulnerable API</div>
+          <PathStep active={services} label="🌐 Service Discovery" detail={services ? "Open services discovered" : "Locked"} />
           <div className="arrow">↓</div>
-          <div className="node identity">🔑 Fake Workload Identity</div>
+          <PathStep active={enumeration} label="⚙ API Enumeration" detail={enumeration ? "Internal surface reached" : "Next: inspect the API"} />
           <div className="arrow">↓</div>
-          <div className="node data">🗄 Synthetic Customer Data</div>
+          <PathStep active={credentials} label="🔑 Credential Access" detail={credentials ? "Training credentials accessed" : "Locked"} />
+          <div className="arrow">↓</div>
+          <PathStep active={collection} label="🗄 Data Access" detail={collection ? "Synthetic data accessed" : "Locked"} />
         </article>
 
         <article className="panel">
@@ -110,6 +118,15 @@ export default async function Home() {
         </div>
       </section>
     </main>
+  );
+}
+
+function PathStep({ active, label, detail }) {
+  return (
+    <div className={"pathStep " + (active ? "active" : "locked")}>
+      <div><strong>{label}</strong><small>{detail}</small></div>
+      <span>{active ? "✓" : "🔒"}</span>
+    </div>
   );
 }
 
