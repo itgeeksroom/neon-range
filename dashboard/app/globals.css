@@ -90,3 +90,11 @@ hr { border:0; border-top:1px solid #24365d; margin:18px 0; }
 \n@media (max-width:900px) {
   header,.grid { grid-template-columns:1fr; }
 }
+
+.pathStep { max-width:420px; margin:auto; padding:12px 14px; border-radius:13px; display:flex; justify-content:space-between; align-items:center; text-align:left; border:1px solid #2b3d63; background:#0d172c; }
+.pathStep div { display:grid; gap:4px; }
+.pathStep small { color:#8fa4cd; font-size:11px; font-weight:500; }
+.pathStep.active { border-color:#43f59d; background:rgba(67,245,157,.07); box-shadow:0 0 22px rgba(67,245,157,.06); }
+.pathStep.active > span { color:#43f59d; font-weight:900; }
+.pathStep.locked { opacity:.52; }
+.pathStep.locked > span { filter:grayscale(1); }
