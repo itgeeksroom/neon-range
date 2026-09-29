@@ -63,6 +63,29 @@ export default async function Home() {
         </article>
       </section>
 
+      <section className="events">
+        <div className="eventsHead">
+          <div><div className="eyebrow">DETECT / INVESTIGATE</div><h2>LIVE SECURITY EVENTS</h2></div>
+          <div className="eventCount">{events.length} EVENTS</div>
+        </div>
+        {events.length === 0 ? (
+          <div className="emptyEvent">No NovaCorp activity yet. Open the target API to generate telemetry.</div>
+        ) : (
+          <div className="eventList">
+            {events.slice(0, 8).map((event) => (
+              <div className="eventRow" key={event.id}>
+                <span className={"eventDot " + event.severity} />
+                <div className="eventBody">
+                  <strong>{event.title}</strong>
+                  <small>{event.method} {event.path} · {event.phase} · {event.source}</small>
+                </div>
+                <span className="eventTime">{event.time}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
       <section className="mission">
         <div className="eyebrow">🎮 TRAINING MODE</div>
         <h2>MISSION 01 / {s.current_mission.name.toUpperCase()}</h2>
@@ -70,7 +93,7 @@ export default async function Home() {
         <div className="difficulty">Difficulty ●○○○○ &nbsp; {s.current_mission.difficulty}</div>
         <div className="buttons">
           <a href="http://localhost:8080/docs">START MISSION</a>
-          <a className="secondary" href="http://localhost:8000/api/status">VIEW LAB API</a>
+          <a className="secondary" href="http://localhost:8000/api/events">VIEW EVENTS</a>
         </div>
       </section>
     </main>
