@@ -1,0 +1,15 @@
+rules:
+  - id: NR-RUNTIME-001
+    name: Unexpected shell in application workload
+    severity: high
+    status: planned
+    description: >
+      Training rule for detecting a shell process spawned inside
+      an application container.
+
+  - id: NR-DATA-001
+    name: Sensitive synthetic dataset accessed
+    severity: critical
+    status: planned
+    description: >
+      Training rule for detecting access to synthetic high-risk data.
