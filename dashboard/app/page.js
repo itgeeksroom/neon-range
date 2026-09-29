@@ -36,6 +36,13 @@ export default async function Home() {
   const enumeration = hasPhase("ENUMERATION");
   const credentials = hasPhase("CREDENTIAL ACCESS");
   const collection = hasPhase("COLLECTION");
+  const stages = [
+    { name: "RECON", done: recon, evidence: events.filter((e) => e.phase === "RECON") },
+    { name: "SERVICES", done: services, evidence: events.filter((e) => e.phase === "SERVICE DISCOVERY") },
+    { name: "ENUMERATION", done: enumeration, evidence: events.filter((e) => e.phase === "ENUMERATION") },
+    { name: "CREDENTIALS", done: credentials, evidence: events.filter((e) => e.phase === "CREDENTIAL ACCESS") },
+    { name: "DATA", done: collection, evidence: events.filter((e) => e.phase === "COLLECTION") }
+  ];
 
   return (
     <main>
@@ -84,22 +91,42 @@ export default async function Home() {
         </article>
       </section>
 
+      <section className="journey">
+        <div className="eventsHead">
+          <div><div className="eyebrow">ATTACK / INTERPRET</div><h2>ATTACK JOURNEY</h2></div>
+          <div className="eventCount">{stages.filter((stage) => stage.done).length}/5 STAGES</div>
+        </div>
+        <div className="journeyRail">
+          {stages.map((stage, index) => (
+            <div className={"journeyStage " + (stage.done ? "done" : "waiting")} key={stage.name}>
+              <div className="stageTop"><span>{stage.done ? "✓" : index + 1}</span><strong>{stage.name}</strong></div>
+              <small>{stage.done ? stage.evidence.length + " evidence event(s)" : "Not reached"}</small>
+              {stage.done && stage.evidence.length > 0 && (
+                <details>
+                  <summary>Evidence</summary>
+                  {stage.evidence.slice(0, 5).map((event) => (
+                    <div className="evidenceLine" key={event.id}>{event.method} {event.path}</div>
+                  ))}
+                </details>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="events">
         <div className="eventsHead">
-          <div><div className="eyebrow">DETECT / INVESTIGATE</div><h2>LIVE SECURITY EVENTS</h2></div>
+          <div><div className="eyebrow">RAW TELEMETRY</div><h2>SECURITY EVENT STREAM</h2></div>
           <div className="eventCount">{events.length} EVENTS</div>
         </div>
         {events.length === 0 ? (
-          <div className="emptyEvent">No NovaCorp activity yet. Open the target API to generate telemetry.</div>
+          <div className="emptyEvent">No activity yet. Start with the local recon sensor.</div>
         ) : (
           <div className="eventList">
-            {events.slice(0, 8).map((event) => (
+            {events.slice(0, 6).map((event) => (
               <div className="eventRow" key={event.id}>
                 <span className={"eventDot " + event.severity} />
-                <div className="eventBody">
-                  <strong>{event.title}</strong>
-                  <small>{event.method} {event.path} · {event.phase} · {event.source}</small>
-                </div>
+                <div className="eventBody"><strong>{event.title}</strong><small>{event.method} {event.path} · {event.phase}</small></div>
                 <span className="eventTime">{event.time}</span>
               </div>
             ))}
