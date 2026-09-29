@@ -1,0 +1,27 @@
+services:
+  vulnerable-app:
+    build: ./vulnerable-app
+    ports:
+      - "8080:8080"
+    environment:
+      - LAB_MODE=true
+      - FAKE_ACCESS_KEY=NR_FAKE_ACCESS_KEY_12345
+      - FAKE_SECRET_KEY=NR_FAKE_SECRET_KEY_67890
+    volumes:
+      - ./synthetic-data:/app/synthetic-data:ro
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - LAB_MODE=true
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+    depends_on:
+      - backend
