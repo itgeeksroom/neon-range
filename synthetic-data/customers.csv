@@ -1,0 +1,6 @@
+customer_id,name,email,ssn,classification
+1001,John Test,john.test@example.invalid,111-22-3333,HIGHLY_SENSITIVE
+1002,Jane Test,jane.test@example.invalid,222-33-4444,HIGHLY_SENSITIVE
+1003,Alex Demo,alex.demo@example.invalid,333-44-5555,HIGHLY_SENSITIVE
+1004,Sam Sample,sam.sample@example.invalid,444-55-6666,HIGHLY_SENSITIVE
+1005,Taylor Lab,taylor.lab@example.invalid,555-66-7777,HIGHLY_SENSITIVE
