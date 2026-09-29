@@ -98,3 +98,16 @@ hr { border:0; border-top:1px solid #24365d; margin:18px 0; }
 .pathStep.active > span { color:#43f59d; font-weight:900; }
 .pathStep.locked { opacity:.52; }
 .pathStep.locked > span { filter:grayscale(1); }
+
+.journey { margin-top:18px; padding:22px; border:1px solid #24365d; border-radius:18px; background:rgba(12,19,40,.9); }
+.journeyRail { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:16px; }
+.journeyStage { min-height:115px; padding:14px; border-radius:12px; border:1px solid #2b3d63; background:#0d172c; }
+.journeyStage.done { border-color:#43f59d; background:rgba(67,245,157,.05); }
+.journeyStage.waiting { opacity:.5; }
+.stageTop { display:flex; gap:9px; align-items:center; }
+.stageTop span { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:#172440; font-size:11px; }
+.journeyStage.done .stageTop span { background:#123a31; color:#43f59d; }
+.journeyStage small { display:block; color:#8fa4cd; margin-top:8px; }
+.journeyStage details { margin-top:10px; font-size:11px; color:#77e9ff; cursor:pointer; }
+.evidenceLine { margin-top:6px; color:#9eb1d6; font-family:monospace; overflow-wrap:anywhere; }
+@media (max-width:900px) { .journeyRail { grid-template-columns:1fr; } }
