@@ -72,6 +72,21 @@ h2 { margin-top:0; letter-spacing:.06em; font-size:16px; }
 }
 .buttons a.secondary { background:#17223f; color:#e9f1ff; border:1px solid #2b4171; }
 hr { border:0; border-top:1px solid #24365d; margin:18px 0; }
-@media (max-width:900px) {
+
+.events { margin-top:18px; padding:22px; border:1px solid #24365d; border-radius:18px; background:rgba(12,19,40,.9); }
+.eventsHead { display:flex; justify-content:space-between; align-items:center; gap:18px; }
+.eventsHead h2 { margin:5px 0 0; font-size:20px; }
+.eventCount { color:#77e9ff; font-size:11px; font-weight:900; letter-spacing:.12em; }
+.eventList { margin-top:16px; display:grid; gap:8px; }
+.eventRow { display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center; padding:12px 14px; background:#0d172c; border:1px solid #1f3155; border-radius:11px; }
+.eventDot { width:9px; height:9px; border-radius:50%; background:#63e6ff; box-shadow:0 0 12px currentColor; }
+.eventDot.low { background:#ffe66d; }
+.eventDot.high { background:#ff9f43; }
+.eventDot.critical { background:#ff4d6d; }
+.eventBody { display:grid; gap:4px; }
+.eventBody small { color:#8fa4cd; }
+.eventTime { color:#7085ad; font-size:11px; font-family:monospace; }
+.emptyEvent { margin-top:16px; padding:18px; color:#8fa4cd; border:1px dashed #2a3e68; border-radius:12px; }
+\n@media (max-width:900px) {
   header,.grid { grid-template-columns:1fr; }
 }
