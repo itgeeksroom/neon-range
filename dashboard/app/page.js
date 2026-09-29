@@ -1,6 +1,6 @@
 async function getStatus() {
   try {
-    const base = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+    const base = process.env.BACKEND_URL || "http://localhost:8000";
     const res = await fetch(`${base}/api/status`, { cache: "no-store" });
     if (!res.ok) throw new Error("Backend unavailable");
     return await res.json();
